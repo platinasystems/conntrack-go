@@ -22,7 +22,7 @@ const (
 // The full conntrack flow structure is very complicated and can be found in the file:
 // http://git.netfilter.org/libnetfilter_conntrack/tree/include/internal/object.h
 // For the time being, the structure below allows to parse and extract the base information of a flow
-type ipTuple struct {
+type IpTuple struct {
 	Bytes    uint64
 	DstIP    net.IP
 	DstPort  uint16
@@ -34,8 +34,8 @@ type ipTuple struct {
 
 type ConntrackFlow struct {
 	FamilyType uint8
-	Forward    ipTuple
-	Reverse    ipTuple
+	Forward    IpTuple
+	Reverse    IpTuple
 	Mark       uint32
 }
 
