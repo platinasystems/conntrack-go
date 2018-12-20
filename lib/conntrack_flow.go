@@ -15,6 +15,10 @@ const (
 // InetFamily Family type
 type InetFamily uint8
 
+const (
+	AF_INET = InetFamily(unix.AF_INET)
+	AF_INET6 = InetFamily(unix.AF_INET6)
+)
 // The full conntrack flow structure is very complicated and can be found in the file:
 // http://git.netfilter.org/libnetfilter_conntrack/tree/include/internal/object.h
 // For the time being, the structure below allows to parse and extract the base information of a flow
