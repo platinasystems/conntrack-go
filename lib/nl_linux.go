@@ -21,6 +21,7 @@ const (
 	FAMILY_V4   = unix.AF_INET
 	FAMILY_V6   = unix.AF_INET6
 	FAMILY_MPLS = AF_MPLS
+	NETLINK_NETFILTER = unix.NETLINK_NETFILTER
 	// Arbitrary set value (greater than default 4k) to allow receiving
 	// from kernel more verbose messages e.g. for statistics,
 	// tc rules or filters, or other more memory requiring data.
