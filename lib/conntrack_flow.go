@@ -6,15 +6,6 @@ import (
 	"golang.org/x/sys/unix"
 )
 
-const (
-	// For Parsing Mark
-	TCP_PROTO = 6
-	UDP_PROTO = 17
-)
-var L4ProtoMap = map[uint8]string{
-	6:  "tcp",
-	17: "udp",
-}
 type ConntrackTableType uint8
 const (
 	ConntrackTable = ConntrackTableType(1)

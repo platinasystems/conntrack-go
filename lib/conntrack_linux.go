@@ -14,6 +14,11 @@ var L4ProtoMap = map[uint8]string{
 	6:  "tcp",
 	17: "udp",
 }
+const (
+	// For Parsing Mark
+	TCP_PROTO = 6
+	UDP_PROTO = 17
+)
 
 // All the following constants are coming from:
 // https://github.com/torvalds/linux/blob/master/include/uapi/linux/netfilter/nfnetlink_conntrack.h
