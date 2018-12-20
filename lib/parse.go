@@ -86,7 +86,7 @@ func parseNfAttrTL(r *bytes.Reader) (isNested bool, attrType, len uint16) {
 // <len, NLA_F_NESTED|nl.CTA_TUPLE_PROTO, 1 byte for the protocol, 3 bytes of padding>
 // <len, CTA_PROTO_SRC_PORT, 2 bytes for the source port, 2 bytes of padding>
 // <len, CTA_PROTO_DST_PORT, 2 bytes for the source port, 2 bytes of padding>
-func parseIpTuple(reader *bytes.Reader, tpl *ipTuple) uint8 {
+func parseIpTuple(reader *bytes.Reader, tpl *IpTuple) uint8 {
 	for i := 0; i < 2; i++ {
 		_, t, _, v := parseNfAttrTLV(reader)
 		switch t {
