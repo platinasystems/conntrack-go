@@ -36,14 +36,15 @@ type ConntrackFlow struct {
 	FamilyType uint8
 	Forward    IpTuple
 	Reverse    IpTuple
+	TCPState   string
 	Mark       uint32
 }
 
 func (s *ConntrackFlow) String() string {
 	// conntrack cmd output:
 	// udp      17 src=127.0.0.1 dst=127.0.0.1 sport=4001 dport=1234 packets=5 bytes=532 [UNREPLIED] src=127.0.0.1 dst=127.0.0.1 sport=1234 dport=4001 packets=10 bytes=1078 mark=0
-	return fmt.Sprintf("%s\t%d src=%s dst=%s sport=%d dport=%d packets=%d bytes=%d\tsrc=%s dst=%s sport=%d dport=%d packets=%d bytes=%d mark=%d",
-		L4ProtoMap[s.Forward.Protocol], s.Forward.Protocol,
+	return fmt.Sprintf("%s\t%d %s src=%s dst=%s sport=%d dport=%d packets=%d bytes=%d\tsrc=%s dst=%s sport=%d dport=%d packets=%d bytes=%d mark=%d",
+		L4ProtoMap[s.Forward.Protocol], s.Forward.Protocol, s.TCPState,
 		s.Forward.SrcIP.String(), s.Forward.DstIP.String(), s.Forward.SrcPort, s.Forward.DstPort, s.Forward.Packets, s.Forward.Bytes,
 		s.Reverse.SrcIP.String(), s.Reverse.DstIP.String(), s.Reverse.SrcPort, s.Reverse.DstPort, s.Reverse.Packets, s.Reverse.Bytes,
 		s.Mark)

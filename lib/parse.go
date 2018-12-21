@@ -44,6 +44,8 @@ func parseRawData(data []byte) *ConntrackFlow {
 				s.Forward.Bytes, s.Forward.Packets = parseByteAndPacketCounters(reader)
 			case CTA_COUNTERS_REPLY:
 				s.Reverse.Bytes, s.Reverse.Packets = parseByteAndPacketCounters(reader)
+			case CTA_PROTOINFO:
+				s.TCPState = parseProtoInfo(reader)
 			}
 		}
 	}
@@ -61,6 +63,17 @@ func parseRawData(data []byte) *ConntrackFlow {
 		}
 	}
 	return s
+}
+func parseProtoInfo(reader *bytes.Reader) (state string){
+	_, t, _, v := parseNfAttrTLV(reader)
+	switch t {
+	case CTA_PROTOINFO_TCP:
+		switch v[2] {
+		case CTA_PROTOINFO_TCP_STATE:
+			state = tcpState[v[4]]
+		}
+	}
+	return
 }
 func parseNfAttrTLV(r *bytes.Reader) (isNested bool, attrType, len uint16, value []byte) {
 	isNested, attrType, len = parseNfAttrTL(r)

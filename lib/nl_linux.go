@@ -27,7 +27,21 @@ const (
 	// tc rules or filters, or other more memory requiring data.
 	RECEIVE_BUFFER_SIZE = 65536
 )
-
+// taken from libnetfilter_conntrack/src/conntrack/snprintf.c
+var tcpState = []string{
+	"NONE",
+	"SYN_SENT",
+	"SYN_RECV",
+	"ESTABLISHED",
+	"FIN_WAIT",
+	"CLOSE_WAIT",
+	"LAST_ACK",
+	"TIME_WAIT",
+	"CLOSE",
+	"LISTEN",
+	"MAX",
+	"IGNORE",
+}
 // SupportedNlFamilies contains the list of netlink families this netlink package supports
 var SupportedNlFamilies = []int{unix.NETLINK_ROUTE, unix.NETLINK_XFRM, unix.NETLINK_NETFILTER}
 
