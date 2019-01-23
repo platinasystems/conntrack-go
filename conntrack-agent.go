@@ -9,6 +9,10 @@ import (
 )
 
 func main(){
+	err := lib.Init()
+	if err != nil {
+		log.Fatalln("failed at Init..ERROR:",err)
+	}
 	h,err := lib.NewHandle(unix.NETLINK_NETFILTER)
 	if err != nil {
 		log.Fatalln("failed to create Handle..ERROR:",err)

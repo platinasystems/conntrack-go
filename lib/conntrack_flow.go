@@ -4,6 +4,8 @@ import (
 	"net"
 	"fmt"
 	"golang.org/x/sys/unix"
+	"os"
+	"errors"
 )
 
 type ConntrackTableType uint8
@@ -104,7 +106,22 @@ func (h *Handle) dumpConntrackTable(table ConntrackTableType, family InetFamily)
 	req := h.newConntrackRequest(table, family, IPCTNL_MSG_CT_GET, unix.NLM_F_DUMP)
 	return req.Execute(unix.NETLINK_NETFILTER, 0)
 }
-
+func Init() (err error){
+	err = enableConntrack("/proc/sys/net/netfilter/nf_conntrack_acct","1")
+	if err != nil {
+		return errors.New("failed to enable conntrack...ERROR:"+err.Error())
+	}
+	return
+}
+func enableConntrack(path, value string) (err error) {
+	file, err := os.Create(path)
+	defer file.Close()
+	if err != nil {
+		return err
+	}
+	file.WriteString(value)
+	return
+}
 func NewHandle(nlFamilies ...int) (*Handle, error) {
 	return newHandle(None(), None(), nlFamilies...)
 }
