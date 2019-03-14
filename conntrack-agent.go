@@ -9,6 +9,7 @@ import (
 )
 
 func main(){
+	//testing
 	err := lib.Init()
 	if err != nil {
 		log.Fatalln("failed at Init..ERROR:",err)
